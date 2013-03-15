@@ -11,7 +11,13 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+// Route::get('/', function()
+// {
+// 	return View::make('hello');
+// });
+
+Route::get('/', 'AuthController@welcome');
+
+Route::get('/login', 'AuthController@login');
+
+Route::get('/auth/callback', 'AuthController@callback');
