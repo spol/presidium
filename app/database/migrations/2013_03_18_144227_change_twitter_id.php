@@ -45,7 +45,26 @@ class ChangeTwitterId extends Migration {
 	{
 		Schema::table('users', function($table)
 		{
-			//
+			$table->integer('temp');
+		});
+
+		DB::table('users')->update(array('temp' => DB::Raw('twitter_id')));
+
+		Schema::table('users', function($table)
+		{
+			$table->dropColumn('twitter_id');
+		});
+
+		Schema::table('users', function($table)
+		{
+			$table->integer('twitter_id');
+		});
+
+		DB::table('users')->update(array('twitter_id' => DB::Raw('temp')));
+
+		Schema::table('users', function($table)
+		{
+			$table->dropColumn('temp');
 		});
 	}
 

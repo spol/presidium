@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class AuthController extends BaseController {
 
 	public function __construct()
@@ -66,8 +68,40 @@ class AuthController extends BaseController {
 			{
 				$userDetails = json_decode($this->tmhOAuth->response['response']);
 				var_dump($userDetails);
+
+				$exists = User::where('twitter_id', '=', $userDetails->id)->get();
+
+				if (!count($exists))
+				{
+					// add to table
+					$user = new User();
+
+					$user->twitter_id = $userDetails->id;
+					$user->email = "";
+					$user->authorized = false;
+				}
+
+				else
+				{
+					$user = $exists[0];
+				}
+				$user->name = $userDetails->name;
+				$user->screen_name = $userDetails->screen_name;
+				$user->last_login = Carbon::now();
+				$user->last_active = Carbon::now();
+
+				$user->save();
+
+				if ($user->authorized)
+				{
+					Session::put('user_id', $user->id);
+					return Redirect::to('/');
+				}
+				else
+				{
+					return Redirect::to('/private');
+				}
 			}
-			//return Redirect::to('/');
 		} else {
 			var_dump($code);
 			return "Auth Error: " . $this->tmhOAuth->response['response'];
