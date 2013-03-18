@@ -18,6 +18,8 @@
 
 Route::get('/', 'AuthController@welcome');
 
-Route::get('/login', 'AuthController@login');
+Route::get('login', 'AuthController@login');
 
-Route::get('/auth/callback', 'AuthController@callback');
+Route::get('auth/callback', 'AuthController@callback');
+
+Route::get('private', 'AuthController@private');

@@ -14,7 +14,7 @@ class AuthController extends BaseController {
 
 	public function welcome()
 	{
-		return View::make('login');
+		return View::make('auth.login');
 	}
 
 	public function login()
@@ -109,4 +109,8 @@ class AuthController extends BaseController {
 		return "Callback!";
 	}
 
+	public function private()
+	{
+		return View::make('auth/private');
+	}
 }
