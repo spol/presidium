@@ -109,8 +109,8 @@ class AuthController extends BaseController {
 		return "Callback!";
 	}
 
-	public function private()
+	public function sitePrivate()
 	{
-		return View::make('auth/private');
+		return View::make('auth.private');
 	}
 }

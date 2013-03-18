@@ -22,4 +22,4 @@ Route::get('login', 'AuthController@login');
 
 Route::get('auth/callback', 'AuthController@callback');
 
-Route::get('private', 'AuthController@private');
+Route::get('private', 'AuthController@sitePrivate');
