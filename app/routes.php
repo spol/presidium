@@ -34,7 +34,8 @@ Route::group(array('before' => 'authRequired'), function()
 	// Threads
 	Route::model('thread', 'Thread');
 
-	Route::post('/discussion/new', array('as' => 'startDiscussion', 'uses' => 'ThreadsController@createThread'));
+	Route::get('/discussion/new', array('as' => 'startDiscussion', 'uses' => 'ThreadsController@createThreadForm'));
+	Route::post('/discussion/new', array('as' => 'startDiscussionSubmit', 'uses' => 'ThreadsController@createThread'));
 	Route::get('/discussion/{thread}', 'ThreadsController@threadView');
 
 });

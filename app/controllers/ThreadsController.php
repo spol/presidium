@@ -18,6 +18,11 @@ class ThreadsController extends BaseController {
 
 	}
 
+	public function createThreadForm()
+	{
+		return View::make('threads.create');
+	}
+
 	public function replyToThread(Thread $thread)
 	{
 
