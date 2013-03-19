@@ -29,6 +29,12 @@ Route::filter('authRequired', function()
 
 Route::group(array('before' => 'authRequired'), function()
 {
-	Route::get('/', array('as' => 'home', 'uses' => 'HomeController@showWelcome'));
+	Route::get('/', array('as' => 'home', 'uses' => 'ThreadsController@threadsList'));
+
+	// Threads
+	Route::model('thread', 'Thread');
+
+	Route::post('/discussion/new', array('as' => 'startDiscussion', 'uses' => 'ThreadsController@createThread'));
+	Route::get('/discussion/{thread}', 'ThreadsController@threadView');
 
 });
