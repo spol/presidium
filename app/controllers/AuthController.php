@@ -67,7 +67,7 @@ class AuthController extends BaseController {
 			else
 			{
 				$userDetails = json_decode($this->tmhOAuth->response['response']);
-				var_dump($userDetails);
+				//var_dump($userDetails);
 
 				$exists = User::where('twitter_id', '=', $userDetails->id)->get();
 
@@ -94,16 +94,16 @@ class AuthController extends BaseController {
 
 				if ($user->authorized)
 				{
-					Session::put('user_id', $user->id);
-					return Redirect::to('/');
+					Session::put('user', $user);
+					return Redirect::route('home');
 				}
 				else
 				{
-					return Redirect::to('/private');
+					return Redirect::route('private');
 				}
 			}
 		} else {
-			var_dump($code);
+			//var_dump($code);
 			return "Auth Error: " . $this->tmhOAuth->response['response'];
 		}
 		return "Callback!";

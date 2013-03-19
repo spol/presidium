@@ -11,15 +11,24 @@
 |
 */
 
-// Route::get('/', function()
-// {
-// 	return View::make('hello');
-// });
+Route::get('welcome', array('as' => 'login', 'uses' => 'AuthController@welcome'));
 
-Route::get('/', 'AuthController@welcome');
-
-Route::get('login', 'AuthController@login');
+Route::get('login', array('as' => 'loginRedirect', 'uses' => 'AuthController@login'));
 
 Route::get('auth/callback', 'AuthController@callback');
 
-Route::get('private', 'AuthController@sitePrivate');
+Route::get('private', array('as' => 'private', 'uses' => 'AuthController@sitePrivate'));
+
+Route::filter('authRequired', function()
+{
+	if (!Session::has('user'))
+	{
+		return Redirect::route('login');
+	}
+});
+
+Route::group(array('before' => 'authRequired'), function()
+{
+	Route::get('/', array('as' => 'home', 'uses' => 'HomeController@showWelcome'));
+
+});
