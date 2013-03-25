@@ -7,11 +7,15 @@ Vagrant.configure("2") do |config|
   config.vm.box = "quantal64"
   config.vm.box_url = "https://www.dropbox.com/s/yvw1zoo9ybtzppt/quantal64.box"
 
+  config.vm.hostname = 'presidium'
+
   # Assign this VM to a host-only network IP, allowing you to access it
   # via the IP. Host-only networks can talk to the host machine as well as
   # any other machines on the same network, but cannot be accessed (through this
   # network interface) by any external networks.
   config.vm.network :private_network, ip: "192.168.33.11"
+
+  config.vm.synced_folder ".", "/vagrant", :extra => "dmode=777,fmode=777"
 
   config.vm.provision :shell, :path => "vagrant.sh"
 end

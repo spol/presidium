@@ -38,4 +38,6 @@ Route::group(array('before' => 'authRequired'), function()
 	Route::post('/discussion/new', array('as' => 'startDiscussionSubmit', 'uses' => 'ThreadsController@createThread'));
 	Route::get('/discussion/{thread}', 'ThreadsController@threadView');
 
+	Route::post('discussion/{thread}/reply', array('as' => 'replyToDiscussion', 'uses' => 'ThreadsController@replyToThread'));
+
 });

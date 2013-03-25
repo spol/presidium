@@ -1,8 +1,5 @@
 <?php
 
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableInterface;
-
 class User extends Eloquent {
 
 	/**
@@ -13,5 +10,8 @@ class User extends Eloquent {
 	protected $table = 'users';
 
 
-
+	public function threads()
+	{
+		return $this->HasMany('Thread', 'created_by');
+	}
 }
