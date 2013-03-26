@@ -1,6 +1,7 @@
 <?php
 
 use dflydev\markdown\MarkdownParser;
+use Carbon\Carbon;
 
 class Post extends Eloquent
 {
@@ -19,5 +20,10 @@ class Post extends Eloquent
 		$this->attributes['markdown'] = $value;
 		$markdownParser = new MarkdownParser;
 		$this->attributes['html'] = $markdownParser->transformMarkdown($value);
+	}
+
+	public function getCreatedAtAttribute($value)
+	{
+		return new Carbon($value);
 	}
 }

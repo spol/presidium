@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class Thread extends Eloquent
 {
 
@@ -11,5 +13,15 @@ class Thread extends Eloquent
 	public function posts()
 	{
 		return $this->hasMany('Post', 'thread_id');
+	}
+
+	public function getCreatedAtAttribute($value)
+	{
+		return new Carbon($value);
+	}
+
+	public function getUpdatedAtAttribute($value)
+	{
+		return new Carbon($value);
 	}
 }

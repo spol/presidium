@@ -10,10 +10,10 @@ class ThreadsController extends BaseController {
 
 	public function threadView(Thread $thread)
 	{
-		// var_dump($thread->posts);
 		$view_data = array(
 			"thread" => $thread
 		);
+
 		return View::make('threads.view', $view_data);
 	}
 
