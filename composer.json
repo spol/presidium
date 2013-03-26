@@ -4,7 +4,8 @@
 		"filp/damnit": "dev-master",
 		"dflydev/markdown": "v1.0.2",
 		"nesbot/carbon": "1.2.0",
-		"themattharris/tmhoauth": "0.7.5"
+		"themattharris/tmhoauth": "0.7.5",
+		"rmccue/requests": ">=1.0"
 	},
 	"autoload": {
 		"classmap": [

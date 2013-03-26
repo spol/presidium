@@ -67,7 +67,6 @@ class AuthController extends BaseController {
 			else
 			{
 				$userDetails = json_decode($this->tmhOAuth->response['response']);
-				//var_dump($userDetails);
 
 				$exists = User::where('twitter_id', '=', $userDetails->id)->get();
 
@@ -85,6 +84,7 @@ class AuthController extends BaseController {
 				{
 					$user = $exists[0];
 				}
+
 				$user->name = $userDetails->name;
 				$user->screen_name = $userDetails->screen_name;
 				$user->last_login = Carbon::now();
@@ -94,6 +94,16 @@ class AuthController extends BaseController {
 
 				if ($user->authorized)
 				{
+					$imgUrl = $userDetails->profile_image_url;
+
+					$response = Requests::get($imgUrl);
+					if ($response->status_code == 200)
+					{
+						file_put_contents(public_path() . '/images/profile/'.$user->id.'.jpg', $response->body);
+						$user->profile_image = '/images/profile/'.$user->id.'.jpg';
+						$user->save();
+					}
+
 					Session::put('user', $user);
 					return Redirect::route('home');
 				}
