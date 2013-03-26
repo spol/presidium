@@ -5,7 +5,7 @@
 @foreach ($threads as $thread)
 
 <div class="thread">
-	{{ $thread->topic }}
+	<a href="{{ URL::route('viewDiscussion', array($thread->id)) }}">{{ $thread->topic }}</a>
 </div>
 
 @endforeach

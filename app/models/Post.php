@@ -8,4 +8,16 @@ class Post extends Eloquent
 	{
 		return $this->belongsTo('Thread');
 	}
+
+	public function author()
+	{
+		return $this->belongsTo('User', 'posted_by');
+	}
+
+	public function setContentAttribute($value)
+	{
+		$this->attributes['markdown'] = $value;
+		$markdownParser = new MarkdownParser;
+		$this->attributes['html'] = $markdownParser->transformMarkdown($value);
+	}
 }

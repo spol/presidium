@@ -10,7 +10,7 @@ class ThreadsController extends BaseController {
 
 	public function threadView(Thread $thread)
 	{
-		var_dump($thread->posts);
+		// var_dump($thread->posts);
 		$view_data = array(
 			"thread" => $thread
 		);
@@ -44,10 +44,12 @@ class ThreadsController extends BaseController {
 	{
 		$post = new Post();
 
-		$post->content = Input::get('markdown');
+		$post->content = Input::get('content');
 		$post->posted_by = Session::get('user')->id;
 
 		$thread->posts()->save($post);
+
+		return Redirect::route('viewDiscussion', array($thread->id));
 	}
 
 }

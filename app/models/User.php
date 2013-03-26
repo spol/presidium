@@ -14,4 +14,9 @@ class User extends Eloquent {
 	{
 		return $this->HasMany('Thread', 'created_by');
 	}
+
+	public function posts()
+	{
+		return $this->HasMany('Post', 'posted_by');
+	}
 }
