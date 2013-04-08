@@ -40,12 +40,12 @@
 
     <div class="reply-form">
 
-    {{ Form::open(array('route' => array('replyToDiscussion', $thread->id))) }}
+	{{ Form::open(array('route' => array('replyToDiscussion', $thread->id))) }}
 
-    {{ Form::textarea('content') }}
+	{{ Form::textarea('content') }}
 
-    {{ Form::button("Reply", array('class' => 'btn btn-primary', 'type' => 'submit')) }}
+	{{ Form::button("Reply", array('class' => 'btn btn-primary', 'type' => 'submit')) }}
 
-    {{ Form::close() }}
+	{{ Form::close() }}
     </div>
 @stop
