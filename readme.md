@@ -1,13 +1,9 @@
-## Laravel 4.x
+## Presidium 0.1
 
-### A Framework For Web Artisans
+### A Private Community Forum
 
-[Official Documentation](http://four.laravel.com) (Under Active Development)
-
-### Contributing To Laravel
-
-**All issues and pull requests should be filed on the [laravel/framework](http://github.com/laravel/framework) repository.**
+Documentation to follow
 
 ### License
 
-The Laravel framework is open-sourced software license under the [MIT license](http://opensource.org/licenses/MIT)
+Presidium is open-sourced software license under the [MIT license](http://opensource.org/licenses/MIT)
