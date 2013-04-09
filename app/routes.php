@@ -15,7 +15,7 @@ Route::get('welcome', array('as' => 'login', 'uses' => 'AuthController@welcome')
 
 Route::get('login', array('as' => 'loginRedirect', 'uses' => 'AuthController@login'));
 
-Route::get('auth/callback', 'AuthController@callback');
+Route::get('auth/callback', array('as' => 'twitterCallback', 'uses' => 'AuthController@callback'));
 
 Route::get('private', array('as' => 'private', 'uses' => 'AuthController@sitePrivate'));
 

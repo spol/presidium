@@ -20,7 +20,7 @@ class AuthController extends BaseController {
 	public function login()
 	{
 		$params = array(
-			'oauth_callback' => "http://presidium.dev/auth/callback"
+			'oauth_callback' => URL::route('twitterCallback')
 		);
 
 		$code = $this->tmhOAuth->request('POST', $this->tmhOAuth->url('oauth/request_token', ''), $params);
