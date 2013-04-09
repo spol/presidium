@@ -64,6 +64,7 @@ namespace :mysql do
 		db_user = fetch(:db_user)
 		db_pass = fetch(:db_pass)
 		root_pw = fetch(:mysql_root_pw)
+		run "mysqladmin -uroot -p#{root_pw} create #{db_name}"
 		run "mysql -uroot -p#{root_pw} -e \"GRANT ALL PRIVILEGES ON #{db_name}.* TO '#{db_user}'@'localhost' IDENTIFIED BY '#{db_pass}'\""
 
 	end
