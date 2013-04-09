@@ -92,6 +92,7 @@ namespace :laravel do
 	desc "Set appropriate file permissions"
 	task :perms, :roles => :web do
 		run "chmod -R a+w #{current_release}/app/storage"
+		run "chmod -R a+w #{current_release}/public/images/profile"
 	end
 
 end
