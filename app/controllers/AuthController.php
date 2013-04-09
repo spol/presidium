@@ -77,12 +77,19 @@ class AuthController extends BaseController {
 
 					$user->twitter_id = $userDetails->id;
 					$user->email = "";
-					$user->authorized = false;
+
+					$allowed_users = Config::get('access.allowed');
+
+					$user->authorized = in_array($userDetails->screen_name, $allowed_users);
 				}
 
 				else
 				{
 					$user = $exists[0];
+					if (!$user->authorized && in_array($userDetails->screen_name, $allowed_users))
+					{
+						$user->authorized = true;
+					}
 				}
 
 				$user->name = $userDetails->name;
