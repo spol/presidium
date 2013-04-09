@@ -32,6 +32,7 @@ after "deploy:setup", "mysql:init"
 after "deploy:update_code", "deploy:create_symlinks"
 after "deploy:update_code", "php:composer"
 after "deploy:update_code", "apache:update_vhost"
+after "deploy:update_code", "laravel:perms"
 after "deploy:update_code", "laravel:migrate"
 
 
@@ -86,6 +87,11 @@ namespace :laravel do
 	desc "Run artisan migrations"
 	task :migrate, :roles => :web do
 		run "cd #{current_release} && php artisan migrate"
+	end
+
+	desc "Set appropriate file permissions"
+	task :perms, :roles => :web do
+		run "chmod -R a+w #{current_release}/app/storage"
 	end
 
 end
