@@ -4,7 +4,7 @@ require 'rubygems'
 require 'railsless-deploy'
 require 'capistrano/ext/multistage'
 
-set :stages, %w(stg prd)
-set :default_stage, "stg"
+set :stages, %w(prd)
+set :default_stage, "prd"
 
 load 'config/deploy'

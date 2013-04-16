@@ -1,4 +1,4 @@
-set :application, "Beefeater Postcards"
+set :application, "Presidium"
 set :repository,  "git@bitbucket.org:spolster/presidium.git"
 
 # turn off output colors on Windows
@@ -24,6 +24,9 @@ set :db_name, "presidium"
 set :db_user, "presidium"
 set :db_pass, "presidium"
 
+# Define shared folders to be created by deploy:setup
+set :shared_children, %w(images images/profile logs)
+
 set :group_writable, false
 
 # deployment process
@@ -40,9 +43,14 @@ namespace :deploy do
 
 	desc "Create symlinks to shared data folders - e.g. uploaded images"
 	task :create_symlinks, :roles => :web do
-		# link in the uploads directory
-		#run "rm -r #{current_release}/media"
-		#run "ln -s #{deploy_to}/#{shared_dir}/media #{current_release}/media"
+		# link in the images directory...
+		run "rm -r #{current_release}/public/images"
+		run "ln -s #{deploy_to}/#{shared_dir}/images #{current_release}/public/images"
+		run "mkdir -p #{current_release}/public/images/profile"
+
+		# ...and the logs too.
+		run "rm -r #{current_release}/app/storage/logs"
+		run "ln -s #{deploy_to}/#{shared_dir}/logs #{current_release}/app/storage/logs"
 	end
 end
 
@@ -76,7 +84,6 @@ namespace :php do
 
 	desc "Install composer dependancies"
 	task :composer, :roles => :web do
-#		run "cd #{current_release} && mkdir bin && wget -qO- http://getcomposer.org/installer | php -- --install-dir=bin"
 		run "cd #{current_release} && composer install --no-progress -o"
 	end
 
@@ -91,8 +98,10 @@ namespace :laravel do
 
 	desc "Set appropriate file permissions"
 	task :perms, :roles => :web do
-		run "chmod -R a+w #{current_release}/app/storage"
-		run "chmod -R a+w #{current_release}/public/images/profile"
+		run "chmod -R a+w #{current_release}/app/storage/cache"
+		run "chmod -R a+w #{current_release}/app/storage/meta"
+		run "chmod -R a+w #{current_release}/app/storage/sessions"
+		run "chmod -R a+w #{current_release}/app/storage/views"
 	end
 
 end
