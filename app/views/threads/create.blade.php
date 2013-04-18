@@ -1,11 +1,15 @@
-<h1>Start a new discussion</h1>
+@extends('layouts.master')
 
-{{ Form::open(array('route'=>'startDiscussionSubmit', 'method'=>'post')) }}
+@section('main')
+    <h1>Start a new discussion</h1>
 
-{{ Form::text('topic') }}
+    {{ Form::open(array('route'=>'startDiscussionSubmit', 'method'=>'post')) }}
 
-{{ Form::textarea('content') }}
+    {{ Form::text('topic') }}
 
-{{ Form::button("Start") }}
+    {{ Form::textarea('content') }}
 
-{{ Form::close() }}
+    {{ Form::button("Start", array('class' => 'btn btn-primary', 'type' => 'submit')) }}
+
+    {{ Form::close() }}
+@stop
