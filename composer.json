@@ -1,11 +1,10 @@
 {
 	"require": {
-		"laravel/framework": "4.0.*",
-		"filp/damnit": "dev-master",
-		"dflydev/markdown": "v1.0.2",
-		"nesbot/carbon": "1.2.0",
+		"laravel/framework": "4.0.*@dev",
+		"dflydev/markdown": "1.0.*",
+		"nesbot/carbon": "1.2.*",
 		"themattharris/tmhoauth": "0.7.5",
-		"rmccue/requests": ">=1.0"
+		"rmccue/requests": ">=1.0@dev"
 	},
 	"autoload": {
 		"classmap": [
